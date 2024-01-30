@@ -1,11 +1,13 @@
 /*
-#include -> import da biblioteca
-<iostream> -> biblioteca que trata fluxo de entrada e saída de dados (i:in, o:out, stream:fluxo)
-int main() -> função principal, onde será hospedado o programa
-std -> indicador de função padrão do c++
-cout -> comando para imprimir um output
+#include -> Import da biblioteca
+<iostream> -> Biblioteca que trata fluxo de entrada e saída de dados (i:in, o:out, stream:fluxo)
+int main() -> Função principal, onde será hospedado o programa
+std -> Indicador de função padrão do c++
+cout -> Comando para imprimir um output
 endl -> Fim de linha (endline). Semelhante ao breakrow, faz com que uma linha seja pulada ao término da sentença.
-int <var> -> declara uma variável do tipo inteiro
+const -> Declaração de uma constante.
+int <var> -> Declara uma variável do tipo inteiro
+bool <var> -> Declara uma variável do tipo booleana
 cin -> Faz com que o usuário consiga "inputar" um valor.
 */
 
@@ -14,25 +16,39 @@ cin -> Faz com que o usuário consiga "inputar" um valor.
 int main (){
     std::cout << "Bem vindo ao jogo da advinhação." << std::endl;
 
-    int numero_secreto = 42;
-    std::cout << "O numero secreto é " << numero_secreto << ". Não conte para ninguém!" << std::endl;
+    const int NUMERO_SECRETO = 42;
 
-    int chute;
-    std::cout << "Você deverá acertar o número escolhido pela máquina." << std::endl;
-    std::cin >> chute;
-    std::cout << "Você chutou o número " << chute << "." << std::endl;
+    bool nao_acertou = true;
+    int tentativas = 10;
 
-    if (chute == numero_secreto){
-        std::cout << "Parabéns, você acertou o número secreto!" << std::endl;
+    while (nao_acertou){
+
+        int chute;
+        std::cout << "Você deverá acertar o número escolhido pela máquina." << std::endl;
+        std::cout << "Atualmente você possui " << tentativas << " tentativas restantes." << std::endl;
+        std::cin >> chute;
+
+        bool acertou = chute == NUMERO_SECRETO;
+        bool maior = chute > NUMERO_SECRETO;
+
+        if (acertou) {
+            std::cout << "Parabéns, você acertou o número secreto!" << std::endl;
+            nao_acertou = false;
+        }
+
+        else if (maior) {
+            std::cout << "O chute foi maior do que o número escolhido. Tente novamente" << std::endl;
+            tentativas -= 1;
+        }
+
+        else {
+            std::cout << "O chute foi menor do que o número escolhido. Tente novamente" << std::endl;
+            tentativas -= 1;
+        }
+
     }
 
-    else if (chute > numero_secreto){
-        std::cout << "O chute foi maior do que o número escolhido. Tente novamente" << std::endl;
-    }
-
-    else if (chute < numero_secreto){
-        std::cout << "O chute foi menor do que o número escolhido. Tente novamente" << std::endl;
-    }
+    std::cout << "Fim de jogo! (:" << std::endl;
 
 }
 
