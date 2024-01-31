@@ -25,12 +25,29 @@ int main (){
     const int NUMERO_SECRETO = std::rand() % N;
 
     bool acaba = false;
-    int tentativas = 10;
+    int tentativas = 0;
     
+    std::cout << "Escolha o nível de dificuldade! F para facil, M para médio e D para difícil." << std::endl;
+    char dificuldade;
+    std::cin >> dificuldade;
+    
+    if (dificuldade == 'F'){    
+        tentativas += 15;
+    }
+
+    else if (dificuldade == 'M'){
+        tentativas += 10;
+    }
+
+    else {
+        tentativas += 5;
+    }
+
     while (!acaba){
 
         if (tentativas == 0){
             std::cout << "Suas vidas acabaram ):" << std::endl;
+            std::cout << "O número escolhido era " << NUMERO_SECRETO << "." << std::endl;
             acaba = true;
         }
 
@@ -46,7 +63,7 @@ int main (){
             bool maior = chute > NUMERO_SECRETO;
 
             if (acertou) {
-                std::cout << "Parabéns, você acertou o número secreto e possuía " << 10 - tentativas << " tentativas restantes!" << std::endl;
+                std::cout << "Parabéns, você acertou o número secreto!" << std::endl;
                 acaba = true;
             }
 
