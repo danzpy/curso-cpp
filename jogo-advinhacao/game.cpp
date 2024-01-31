@@ -12,40 +12,54 @@ cin -> Faz com que o usuário consiga "inputar" um valor.
 */
 
 #include<iostream>
+#include <cstdlib>
+#include <ctime>
 
 int main (){
     std::cout << "Bem vindo ao jogo da advinhação." << std::endl;
 
-    const int NUMERO_SECRETO = 42;
+    //Inicializa a semente do gerador de números aleatórios (Não ensinado no curso, até o momento)
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
-    bool nao_acertou = true;
+    const int N = 51;
+    const int NUMERO_SECRETO = std::rand() % N;
+
+    bool acaba = false;
     int tentativas = 10;
+    
+    while (!acaba){
 
-    while (nao_acertou){
-
-        int chute;
-        std::cout << "Você deverá acertar o número escolhido pela máquina." << std::endl;
-        std::cout << "Atualmente você possui " << tentativas << " tentativas restantes." << std::endl;
-        std::cin >> chute;
-
-        bool acertou = chute == NUMERO_SECRETO;
-        bool maior = chute > NUMERO_SECRETO;
-
-        if (acertou) {
-            std::cout << "Parabéns, você acertou o número secreto!" << std::endl;
-            nao_acertou = false;
-        }
-
-        else if (maior) {
-            std::cout << "O chute foi maior do que o número escolhido. Tente novamente" << std::endl;
-            tentativas -= 1;
+        if (tentativas == 0){
+            std::cout << "Suas vidas acabaram ):" << std::endl;
+            acaba = true;
         }
 
         else {
-            std::cout << "O chute foi menor do que o número escolhido. Tente novamente" << std::endl;
-            tentativas -= 1;
-        }
+            std::cout << "Atualmente você possui " << tentativas << " tentativas restantes." << std::endl;
+            std::cout << "Você deverá acertar o número escolhido pela máquina." << std::endl;
 
+            int chute;
+            std::cin >> chute;
+
+
+            bool acertou = chute == NUMERO_SECRETO;
+            bool maior = chute > NUMERO_SECRETO;
+
+            if (acertou) {
+                std::cout << "Parabéns, você acertou o número secreto e possuía " << 10 - tentativas << " tentativas restantes!" << std::endl;
+                acaba = true;
+            }
+
+            else if (maior) {
+                std::cout << "O chute foi maior do que o número escolhido." << std::endl;
+                tentativas -= 1;
+            }
+
+            else {
+                std::cout << "O chute foi menor do que o número escolhido." << std::endl;
+                tentativas -= 1;
+            }
+        }
     }
 
     std::cout << "Fim de jogo! (:" << std::endl;
