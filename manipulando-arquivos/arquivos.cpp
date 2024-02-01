@@ -1,8 +1,5 @@
-#include <fstream>
-#include <iostream>
-#include <string>
-
-using namespace std;
+// "Importando o que será necessário para o programa". Também conhecido com "header file"
+#include "main.hpp"
 
 int main(){
     string line;
