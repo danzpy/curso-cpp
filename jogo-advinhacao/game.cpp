@@ -18,9 +18,10 @@ cin -> Faz com que o usuário consiga "inputar" um valor.
 int main (){
     std::cout << "Bem vindo ao jogo da advinhação." << std::endl;
 
-    //Inicializa a semente do gerador de números aleatórios (Não ensinado no curso, até o momento)
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    //Inicializa a semente do gerador de números aleatórios, com base na data/horario atual.
+    std::srand(std::time(NULL));
 
+    // Divide um valor aleatório com base na semente encontrada, pelo número (range) definido e retorna o seu resto (%)
     const int N = 51;
     const int NUMERO_SECRETO = std::rand() % N;
 
