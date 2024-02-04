@@ -3,10 +3,13 @@
 #include <cctype> // Para usar a função "tolower()"
 #include <map>
 #include <vector>
+#include <fstream> // Para ler arquivo .txt
+#include <ctime> // Para usar a função "rand"
+#include <cstdlib> // Para usar a função "rand"
 
 using namespace std;
 
-const string PALAVRA_SECRETA = "MELANCIA";
+string PALAVRA_SECRETA = "";
 int vidas = 6;
 map <char, bool> chutou;
 vector <char> chutes_errados;
@@ -79,4 +82,40 @@ void imprime_erros(){
         cout << "\nChutes errados: " << letra << " ";
     }
     cout << endl;
+}
+
+
+int escolhe_numero(){
+    //Inicializa a semente do gerador de números aleatórios, com base na data/horario atual.
+    srand(time(NULL));
+
+    // Divide um valor aleatório com base na semente encontrada, pelo número (range) definido e retorna o seu resto (%)
+    const int N = 20;
+    const int NUMERO_ESCOLHIDO = std::rand() % N;
+
+    return NUMERO_ESCOLHIDO;
+}
+
+
+void sorteia_palavra(){
+    ifstream myfile("palavras.txt");
+
+    if (myfile.is_open()){
+        int quantidade;
+
+        myfile >> quantidade;
+
+        int NUMERO_ESCOLHIDO = escolhe_numero();
+
+        for (int i=0; i < quantidade; i += 1){
+            string palavra;
+            myfile >> palavra;
+
+            if (i == NUMERO_ESCOLHIDO){
+                PALAVRA_SECRETA = palavra;
+            }            
+        }
+
+        myfile.close();
+    }
 }
