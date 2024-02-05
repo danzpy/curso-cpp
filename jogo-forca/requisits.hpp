@@ -9,7 +9,7 @@
 
 using namespace std;
 
-string PALAVRA_SECRETA = "";
+string PALAVRA_SECRETA;
 int vidas = 6;
 map <char, bool> chutou;
 vector <char> chutes_errados;
@@ -55,6 +55,7 @@ void imprime_palavra(){
 }
 
 void advinha_verifica(){
+    
     cout << "Tente advinhar uma letra presente na palavra secreta." << endl;
     char chute;
     cin >> chute;
@@ -117,5 +118,10 @@ void sorteia_palavra(){
         }
 
         myfile.close();
+    }
+
+    else {
+        cout << "Não foi possível ler o banco de palavras." << endl;
+        exit(0);
     }
 }
