@@ -15,22 +15,26 @@ using namespace std;
 string word1;
 string word2;
 
-string merged;
-
+string merged = "";
 
 void merge(){
-    
-    for(int i = 0; i < word1.length() + word2.length(); i++){
-        if (i % 2 == 0){
-            cout << word1[index] << " apendado" << endl;
-        }
 
-        else{
-            cout << word2[index] << " apendado" << endl;
+    int tamanhoMaximo = max(word1.size(), word2.size());
+
+    cout << tamanhoMaximo << endl;
+
+    for (int i = 0; i < tamanhoMaximo; i++) {
+        if (i < word1.size()) {
+            merged += word1[i];
+        }
+        if (i < word2.size()) {
+            merged += word2[i];
         }
     }
+
     cout << merged << endl;
 }
+
 
 int main (){
 
@@ -39,7 +43,6 @@ int main (){
     cout << "Digite a segunda string: ";
     cin >> word2;
 
-    cout << "String1, String2 respectivamente: " << word1 << ", " << word2 << endl;
     merge();
     return 0;
 }
